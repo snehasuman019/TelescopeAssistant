@@ -1,0 +1,74 @@
+# File: .gitignore
+
+# Node.js dependencies
+# Never commit node_modules - it can be recreated using 'npm install'
+node_modules/
+
+# Environment variables
+# Contains secrets like API keys - MUST NOT be committed!
+.env
+.env.*
+!.env.example # Often good to commit an example file (without secrets)
+
+# Logs
+# Log files generated during development or runtime
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+# If you add a build step later (e.g., for frontend assets)
+dist/
+build/
+out/
+.next/ # If using Next.js
+
+# Vercel specific directory
+# Contains local development build artifacts or state
+.vercel/
+
+# OS generated files
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE / Editor directories
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw? # Vim swap files
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Test reports and coverage
+coverage/
+lcov.info
+*.lcov
+
+# Optional npm cache directory (if configured locally)
+.npm/
+
+# Optional Yarn cache directory
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.* # Yarn PnP files
+.vercel

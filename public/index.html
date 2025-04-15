@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telescope Assistant Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            light: '#4B6CB7',
+                            DEFAULT: '#2B5797', 
+                            dark: '#1D3C78',
+                        },
+                        secondary: {
+                            light: '#8AB4FF',
+                            DEFAULT: '#4B6CB7',
+                            dark: '#343456',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Preserving the exact classes from original HTML */
+        .message-container { display: flex; flex-direction: column; }
+        .user-message { align-self: flex-end; margin-left: auto; border-bottom-right-radius: 5px; }
+        .bot-message { align-self: flex-start; border-bottom-left-radius: 5px; }
+        .error-message { color: red; font-weight: bold; }
+    </style>
+</head>
+<body class="font-sans m-0 p-0 flex flex-col h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Check for dark mode preference -->
+    <script>
+        if ((!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        }
+    </script>
+
+    <!-- Main chat interface with card design -->
+    <div class="max-w-4xl w-full mx-auto my-auto h-[90vh] flex flex-col overflow-hidden rounded-xl shadow-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-primary-light to-primary p-4 text-white flex justify-between items-center shadow-md">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-telescope text-2xl"></i>
+                <h1 class="text-xl font-semibold">Telescope Assistant</h1>
+            </div>
+            <button id="theme-toggle" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all duration-200">
+                <i class="fa-solid fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+
+        <!-- Chat area -->
+        <div id="chatbox" class="flex-grow overflow-y-auto p-5 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+            <!-- Initial welcome message -->
+            <div class="message-container">
+                <div class="message bot-message max-w-[80%] bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white p-3 mb-4 rounded-2xl rounded-bl-sm shadow-sm">
+                    Hello! Ask me anything about astronomy or telescopes.
+                </div>
+            </div>
+        </div>
+
+        <!-- Status area -->
+        <div id="status" class="text-center p-2 h-6 italic text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800"></div>
+
+        <!-- Input area -->
+        <div id="input-area" class="flex p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <input 
+                type="text" 
+                id="userInput" 
+                placeholder="Type your message..." 
+                class="flex-grow py-3 px-4 rounded-full border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+            >
+            <button 
+                id="sendButton"
+                class="ml-3 px-6 py-3 bg-primary hover:bg-primary-dark text-white rounded-full transition-colors duration-200 flex items-center justify-center"
+            >
+                <span>Send</span>
+                <i class="fa-solid fa-paper-plane ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Add a script to handle dark mode toggle -->
+    <script>
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            // Set the initial icon state
+            if (document.documentElement.classList.contains('dark')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+            
+            // Theme toggle functionality
+            themeToggle.addEventListener('click', function() {
+                document.documentElement.classList.toggle('dark');
+                
+                if (document.documentElement.classList.contains('dark')) {
+                    localStorage.setItem('theme', 'dark');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            });
+        });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
